@@ -224,24 +224,28 @@ def fix_custom_rules(input_file: str, output_file: str, start_rule_id: int = 100
 ################################################################################
 # MAIN SCRIPT
 ################################################################################
+from dotenv import load_dotenv
+
 
 if __name__ == "__main__":
-#     # 1) Generate all ModSecurity rules by calling OpenAI for each <Issue>
-#     critical_issues_xml = "critical_issues.xml"       # your input XML
-#     openai_api_key = "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"            
+    load_dotenv()
+    # 1) Generate all ModSecurity rules by calling OpenAI for each <Issue>
+    critical_issues_xml = "critical_issues.xml"       # your input XML
+    OPENAIAPIKEY = os.getenv("OPENAI_KEY")
+    openai_api_key = OPENAIAPIKEY
     
     
   
-#     generate_modsecurity_rules_from_issues(
-#         critical_issues_file=critical_issues_xml,
-#         openai_api_key=openai_api_key,
-#         output_rule_file="customrules.conf"
-#     )
-#     fix_custom_rules(
-#     input_file="customrules.conf",
-#     output_file="customrules-final.conf",
-#     start_rule_id=9999010101  # or any large enough number
-# )
+    generate_modsecurity_rules_from_issues(
+        critical_issues_file=critical_issues_xml,
+        openai_api_key=openai_api_key,
+        output_rule_file="customrules.conf"
+    )
+    fix_custom_rules(
+    input_file="customrules.conf",
+    output_file="customrules-final.conf",
+    start_rule_id=9999010101  # or any large enough number
+)
     local_custom_rules_path = "customrules-final.conf" 
     # 2) SSH to the server (using .pem file) and upload the rules.
     ssh_host = "15.228.46.121"
